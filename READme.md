@@ -6,7 +6,7 @@ The purpose of this lab is to develop and showcase real-world Windows Server adm
 
 ---
 
-# 🎯 Objectives
+#Objectives
 
 * Deploy a Windows Server virtual machine
 * Configure Active Directory Domain Services (AD DS)
@@ -23,14 +23,14 @@ The purpose of this lab is to develop and showcase real-world Windows Server adm
 
 ---
 
-# 🛠️ Lab Environment
+#Lab Environment
 
 | Component         | Technology                                                           |
 | ----------------- | -------------------------------------------------------------------- |
 | Virtualization    | Oracle VirtualBox                                                    |
-| Server OS         | Windows Server 2025 Evaluation *(or Windows Server 2022 Evaluation)* |
+| Server OS         | Windows Server 2025 Evaluation
 | Client OS         | Windows 11 Enterprise Evaluation                                     |
-| Domain            | technova.local                                                       |
+| Domain            | InfiniteVoid.local                                                       |
 | Domain Controller | DC01                                                                 |
 | Client Computers  | PC01, PC02                                                           |
 | Scripting         | PowerShell                                                           |
@@ -38,7 +38,7 @@ The purpose of this lab is to develop and showcase real-world Windows Server adm
 
 ---
 
-# 📁 Repository Structure
+#Repository Structure
 
 ```text
 Windows-Server-Lab/
@@ -59,53 +59,53 @@ Windows-Server-Lab/
 
 ---
 
-# 🏢 Enterprise Scenario
+#Enterprise Scenario
 
-This lab simulates a fictional company named **TechNova Ltd.**
+This lab simulates a fictional company named **InfiniteVoid Ltd.**
 
 Departments include:
 
 * Human Resources
 * Finance
-* Information Technology
+* IT
 * Sales
 
 The Windows Server infrastructure is responsible for managing users, computers, authentication, permissions, security policies, and network services for the organization.
 
 ---
 
-# 📚 Lab Roadmap
+#Lab Roadmap
 
-## Phase 1
+#Phase 1
 
 * Install Windows Server
 * Initial server configuration
 
-## Phase 2
+#Phase 2
 
 * Install Active Directory Domain Services
 * Promote server to Domain Controller
 
-## Phase 3
+#Phase 3
 
 * Configure DNS
-* Create the `technova.local` domain
+* Create the `InfiniteVoid.local` domain
 
-## Phase 4
+#Phase 4
 
 * Create Organizational Units (OUs)
 
-## Phase 5
+#Phase 5
 
 * Create users
 * Create security groups
 * Configure Identity and Access Management (IAM)
 
-## Phase 6
+#Phase 6
 
 * Join Windows 11 clients to the domain
 
-## Phase 7
+#Phase 7
 
 * Configure Group Policy Objects (GPO)
 
@@ -118,20 +118,20 @@ Examples include:
 * Disable Command Prompt
 * Account Lockout Policy
 
-## Phase 8
+#Phase 8
 
 * Configure shared folders
 * Configure NTFS permissions
 
-## Phase 9
+#Phase 9
 
 * Install and configure DHCP
 
-## Phase 10
+#Phase 10
 
 * Configure DNS records
 
-## Phase 11
+#Phase 11
 
 * PowerShell administration
 
@@ -143,7 +143,7 @@ Examples include:
 * Enable accounts
 * Retrieve Active Directory users
 
-## Phase 12
+#Phase 12
 
 * Event Viewer
 * Administrative tools
@@ -151,7 +151,7 @@ Examples include:
 
 ---
 
-# 💻 Skills Demonstrated
+#Skills Demonstrated
 
 * Windows Server Administration
 * Active Directory
@@ -174,7 +174,7 @@ Examples include:
 
 ---
 
-# 📸 Documentation
+#Documentation
 
 Screenshots of every completed lab are stored inside the **Screenshots** directory.
 
@@ -182,7 +182,7 @@ Each major configuration step is documented in the **Documentation** folder with
 
 ---
 
-# 📜 PowerShell
+#PowerShell
 
 Automation scripts are stored in the **PowerShell** directory.
 
@@ -196,7 +196,7 @@ Examples include:
 
 ---
 
-# 🎓 Learning Goals
+#Learning Goals
 
 This project is designed to strengthen practical knowledge of enterprise Windows Server administration by simulating common responsibilities performed by system administrators in production environments.
 
@@ -204,7 +204,7 @@ The project emphasizes both graphical administration tools and PowerShell automa
 
 ---
 
-# 🚀 Future Improvements
+#Future Improvements
 
 * Windows Deployment Services (WDS)
 * WSUS
@@ -221,6 +221,6 @@ The project emphasizes both graphical administration tools and PowerShell automa
 
 ---
 
-# 📄 License
+#License
 
 This repository is intended for educational and portfolio purposes only.
