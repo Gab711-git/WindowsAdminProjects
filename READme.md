@@ -1,226 +1,191 @@
 # 🖥️ Windows Server Administration Homelab
 
-A hands-on Windows Server homelab built using Oracle VirtualBox to demonstrate practical system administration skills. This project simulates a small enterprise environment where a Windows Server acts as the Domain Controller, managing users, computers, policies, and network services through Active Directory.
+A hands-on Windows Server homelab built using Oracle VirtualBox to demonstrate practical Windows Server administration skills in a simulated enterprise environment.
 
-The purpose of this lab is to develop and showcase real-world Windows Server administration skills commonly used by System Administrators, IT Support Engineers, and Infrastructure Engineers.
+The lab consists of a Windows Server acting as a Domain Controller and a Windows 11 client joined to the domain. The project focuses on core administrative tasks commonly performed by System Administrators, IT Support Engineers, and Infrastructure Engineers.
+
+All software used in this project is freely available through Microsoft Evaluation editions and Oracle VirtualBox.
 
 ---
 
-#Objectives
+# Objectives
 
-* Deploy a Windows Server virtual machine
+* Deploy Windows Server in a virtual environment
 * Configure Active Directory Domain Services (AD DS)
-* Create and manage users and groups
+* Promote the server to a Domain Controller
+* Create and manage Organizational Units (OUs)
+* Create and manage domain users and security groups
 * Implement Identity and Access Management (IAM)
-* Configure Organizational Units (OUs)
-* Manage passwords and account policies
+* Configure DNS
+* Join a Windows 11 client to the domain
 * Configure Group Policy Objects (GPO)
-* Join Windows clients to the domain
-* Configure DNS and DHCP
-* Manage shared folders and NTFS permissions
-* Automate administrative tasks using PowerShell
-* Document every stage of the deployment
+* Create shared folders and configure NTFS permissions
+* Automate administrative tasks with PowerShell
+* Document each stage of the deployment
 
 ---
 
-#Lab Environment
+# Lab Environment
 
-| Component         | Technology                                                           |
-| ----------------- | -------------------------------------------------------------------- |
-| Virtualization    | Oracle VirtualBox                                                    |
-| Server OS         | Windows Server 2025 Evaluation
-| Client OS         | Windows 11 Enterprise Evaluation                                     |
-| Domain            | InfiniteVoid.local                                                       |
-| Domain Controller | DC01                                                                 |
-| Client Computers  | PC01, PC02                                                           |
-| Scripting         | PowerShell                                                           |
-| Documentation     | Markdown                                                             |
+| Component         | Technology                       |
+| ----------------- | -------------------------------- |
+| Virtualization    | Oracle VirtualBox                |
+| Server OS         | Windows Server 2025 Evaluation   |
+| Client OS         | Windows 11 Enterprise Evaluation |
+| Domain            | InfiniteVoid.local               |
+| Domain Controller | DC01                             |
+| Client            | PC01                             |
+| Scripting         | PowerShell                       |
+| Documentation     | Markdown                         |
 
 ---
 
-#Repository Structure
+# Repository Structure
 
 ```text
 Windows-Server-Lab/
 
-│
-├── ISO/
-│      Windows_Server.iso
-│      Windows11.iso
-│
-├── Screenshots/
-│
-├── PowerShell/
-│
 ├── Documentation/
-│
+├── PowerShell/
+├── Screenshots/
 └── README.md
 ```
 
----
-
-#Enterprise Scenario
-
-This lab simulates a fictional company named **InfiniteVoid Ltd.**
-
-Departments include:
-
-* Human Resources
-* Finance
-* IT
-* Sales
-
-The Windows Server infrastructure is responsible for managing users, computers, authentication, permissions, security policies, and network services for the organization.
+> **Note:** Windows installation ISOs are **not included** in this repository because of Microsoft's licensing restrictions.
 
 ---
 
-#Lab Roadmap
+# Project Roadmap
 
-#Phase 1
+## Phase 1 – Windows Server Installation
 
 * Install Windows Server
-* Initial server configuration
+* Configure networking
+* Rename the server
+* Verify connectivity
 
-#Phase 2
+---
+
+## Phase 2 – Active Directory
 
 * Install Active Directory Domain Services
-* Promote server to Domain Controller
-
-#Phase 3
-
-* Configure DNS
+* Promote the server to Domain Controller
 * Create the `InfiniteVoid.local` domain
 
-#Phase 4
+---
 
-* Create Organizational Units (OUs)
+## Phase 3 – User Administration
 
-#Phase 5
-
+* Create Organizational Units
 * Create users
 * Create security groups
-* Configure Identity and Access Management (IAM)
+* Configure user permissions
 
-#Phase 6
+---
 
-* Join Windows 11 clients to the domain
+## Phase 4 – Windows Client
 
-#Phase 7
+* Install Windows 11
+* Join the client to the domain
+* Verify authentication
 
-* Configure Group Policy Objects (GPO)
+---
 
-Examples include:
+## Phase 5 – Group Policy
+
+Configure common Group Policies, including:
 
 * Password Policy
+* Account Lockout Policy
 * Desktop Wallpaper
 * Disable Control Panel
 * Disable USB Storage
 * Disable Command Prompt
-* Account Lockout Policy
 
-#Phase 8
+---
+
+## Phase 6 – File Services
 
 * Configure shared folders
 * Configure NTFS permissions
+* Test access using different user accounts
 
-#Phase 9
+---
 
-* Install and configure DHCP
+## Phase 7 – PowerShell Administration
 
-#Phase 10
-
-* Configure DNS records
-
-#Phase 11
-
-* PowerShell administration
-
-Examples include:
+Automate administrative tasks such as:
 
 * Create users
 * Reset passwords
-* Disable accounts
-* Enable accounts
-* Retrieve Active Directory users
-
-#Phase 12
-
-* Event Viewer
-* Administrative tools
-* Backup and recovery
+* Enable and disable accounts
+* Query Active Directory users
 
 ---
 
-#Skills Demonstrated
+# Skills Demonstrated
 
 * Windows Server Administration
-* Active Directory
-* Active Directory Users and Computers (ADUC)
 * Active Directory Domain Services (AD DS)
+* Active Directory Users and Computers (ADUC)
 * Identity and Access Management (IAM)
-* Group Policy Management
+* Organizational Unit Administration
+* User & Group Management
 * DNS Administration
-* DHCP Administration
-* Organizational Unit Management
-* User & Group Administration
+* Group Policy Management
 * Windows Authentication
 * NTFS Permissions
-* File Server Administration
-* Remote Desktop Services
+* Shared Folder Administration
 * PowerShell Scripting
 * Windows Networking
 * Virtualization
-* System Documentation
+* Technical Documentation
 
 ---
 
-#Documentation
+# Documentation
 
-Screenshots of every completed lab are stored inside the **Screenshots** directory.
+Each completed phase includes:
 
-Each major configuration step is documented in the **Documentation** folder with explanations and implementation details.
+* Configuration notes
+* Screenshots
+* Commands used
+* Explanations of administrative decisions
 
 ---
 
-#PowerShell
+# PowerShell
 
-Automation scripts are stored in the **PowerShell** directory.
-
-Examples include:
+The `PowerShell` directory contains scripts used throughout the project, including:
 
 * User creation
-* Password reset
-* Account management
+* Password management
+* Account administration
 * Active Directory queries
-* Administrative automation
 
 ---
 
-#Learning Goals
+# Learning Goals
 
-This project is designed to strengthen practical knowledge of enterprise Windows Server administration by simulating common responsibilities performed by system administrators in production environments.
-
-The project emphasizes both graphical administration tools and PowerShell automation while following industry best practices for documentation and organization.
+The objective of this project is to gain practical experience with enterprise Windows Server administration while documenting the implementation process in a professional GitHub portfolio.
 
 ---
 
-#Future Improvements
+# Future Improvements
 
+Potential future additions include:
+
+* DHCP
+* Windows Server Update Services (WSUS)
 * Windows Deployment Services (WDS)
-* WSUS
-* DFS Namespace
-* DFS Replication
 * Certificate Services (AD CS)
-* Print Server
-* File Server Resource Manager
-* Failover Clustering
-* Hyper-V
-* Azure AD / Microsoft Entra ID integration
+* DFS
+* File Server Resource Manager (FSRM)
+* Microsoft Entra ID integration
 * Microsoft Intune integration
-* Monitoring and logging
 
 ---
 
-#License
+# License
 
-This repository is intended for educational and portfolio purposes only.
+This project is intended for educational and portfolio purposes only.
