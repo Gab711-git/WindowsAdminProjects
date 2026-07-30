@@ -13,3 +13,15 @@ STEP 1: Download Windows Server 2025 Evaluation
 STEP 2: Download Windows 11 Enterprise Evaluation
 
     Link: https://www.microsoft.com/en-us/evalcenter/download-windows-11-enterprise
+
+STEP 3: Download Oracle VirtualBox
+
+    Link: https://www.virtualbox.org/wiki/Downloads
+
+STEP 4: Configure the Virtual Machines
+
+    Credentials (Windows Server)
+    Username: Administrator
+    Password: WindowsLab2026!
+
+STEP 5:
