@@ -35,8 +35,17 @@ STEP 5: Rename the server to DC01
     beside the label "To rename this computer or change its domain or workgroup, click Change." 
     Then perform a system restart to apply changes.
 
-STEP 6: Configure the Virtual Network
+STEP 6: Configure the VirtualBox Network
 
+    # Before we begin our connection, we first need to know what connectivity best fits our scenario,
+    in this case, we will use a NAT Network, because we want our system to access the internet, 
+    as well as download updates and install additional tools. While also giving us a 'private network' 
+    which contains my virtual system from interfering with my home LAN. Why not use Bridged Adapter? Because we do not want our virtual system to be accessed and known to other people on the LAN, and that we are doing this safely in a private-controlled environment.
+
+    # We shut down the server first, open our Virtual Machine, click on settings, then head to Network, 
+    and change it to NAT Network. 
+    
+    # The DC01 Server is already configured to NAT Network.
 
 Step 7: Configure a static IP address
 
