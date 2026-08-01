@@ -44,6 +44,12 @@ STEP 4: Configure the VirtualBox Network
 
 Step 5: Configure a static IP address
 
+    # Why do we need to configure our Domain Controller's IP address?
+    because we do not want DHCP to set it automatically for us, 
+    a Domain Controller needs to have a fixed, predictable IP address.
+
+    # Open Command Prompt by pressing 
+    Win + R or Win + S, type cmd and hit enter, we first verify the ip addresses, our virtual machines begin with 10.x.x.x and our host machine begins with 192.x.x.x, therefore, we have successfully created a subnet on our last step. Now, let us open our Control Panel, .
 
 Step 6: Verify Connectivity
 
