@@ -1,10 +1,10 @@
 PHASE 1 - Windows Server 2025 Evaluation Installation
 
-    This project uses Microsoft Evaluation editions.
+    # This project uses Microsoft Evaluation editions.
 
-    -Windows Server 2025 Evaluation -Download from Microsoft's Evaluation Center
-    -Windows 11 Enterprise Evaluation - Download from Micosoft's Evaluation Center
-    -Oracle VirtualBox - Download from Oracle
+    # Windows Server 2025 Evaluation -Download from Microsoft's Evaluation Center
+    # Windows 11 Enterprise Evaluation - Download from Micosoft's Evaluation Center
+    # Oracle VirtualBox - Download from Oracle
 
 STEP 1: Download Windows Server 2025 Evaluation
 
@@ -20,17 +20,20 @@ STEP 3: Download Oracle VirtualBox
 
 STEP 4: Install and configure the Virtual Machines
 
-    Credentials for Windows Server Evaluation
+    # Credentials for Windows Server Evaluation
     Username: Administrator
     Password: WindowsLab2026!
 
-    Credentials for Windows 11 Evaluation
+    # Credentials for Windows 11 Evaluation
     Username: Admin
     Password: WindowsLab2026$
 
 STEP 5: Rename the server to DC01
 
-    -Open Server Manager, then head to Local Server, click on the Server's Name, in this case 'WIN-M3TE09BT9RP' change it to 'DC01' by clicking on Change button, beside the label "To rename this computer or change its domain or workgroup, click Change." Then perform a system estart to apply changes.
+    # Open Server Manager, then head to Local Server, click on the Server's Name,
+    in this case 'WIN-M3TE09BT9RP' change it to 'DC01' by clicking on Change button,
+    beside the label "To rename this computer or change its domain or workgroup, click Change." 
+    Then perform a system restart to apply changes.
 
 STEP 6: Configure the Virtual Network
 
