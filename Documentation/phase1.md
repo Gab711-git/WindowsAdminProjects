@@ -22,14 +22,14 @@ STEP 2: Install and configure the Virtual Machines
     Username: Admin
     Password: WindowsLab2026$
 
-STEP 5: Rename the server to DC01
+STEP 3: Rename the server to DC01
 
     # Open Server Manager, then head to Local Server, click on the Server's Name,
     in this case 'WIN-M3TE09BT9RP' change it to 'DC01' by clicking on Change button,
     beside the label "To rename this computer or change its domain or workgroup, click Change." 
     Then perform a system restart to apply changes.
 
-STEP 6: Configure the VirtualBox Network
+STEP 4: Configure the VirtualBox Network
 
     # Before we begin our connection, we first need to know what connectivity best fits our scenario,
     in this case, we will use a NAT Network, because we want our system to access the internet, 
@@ -46,10 +46,10 @@ STEP 6: Configure the VirtualBox Network
 
     # The DC01 Server and Windows 11 Enterprise is already configured to NAT Network.
 
-Step 7: Configure a static IP address
+Step 5: Configure a static IP address
 
 
-Step 8: Verify Connectivity
+Step 6: Verify Connectivity
 
 
 
