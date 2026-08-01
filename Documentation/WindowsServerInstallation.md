@@ -20,8 +20,12 @@ STEP 3: Download Oracle VirtualBox
 
 STEP 4: Configure the Virtual Machines
 
-    Credentials (Windows Server)
+    Credentials (Windows Server Evaluation)
     Username: Administrator
     Password: WindowsLab2026!
+
+    Credentials (Windows 11 Evaluation)
+    Username: Admin
+    Password: WindowsLab2026$
 
 STEP 5:
