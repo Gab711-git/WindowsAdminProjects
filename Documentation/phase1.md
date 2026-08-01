@@ -1,14 +1,10 @@
-PHASE 1 - Windows Server 2025 Evaluation Installation
-
-    # This project uses Microsoft Evaluation editions.
-
-    # Windows Server 2025 Evaluation -Download from Microsoft's Evaluation Center
-    # Windows 11 Enterprise Evaluation - Download from Micosoft's Evaluation Center
-    # Oracle VirtualBox - Download from Oracle
+# PHASE 1
 
 STEP 1:  Download the Prerequisites
 
-    # Download Windows Server 2025 Evaluation
+    # This project uses Microsoft Evaluation editions
+
+    # Download Windows Server 2022 Evaluation
     # Download Windows 11 Enterprise Evaluation
     # Download Oracle VirtualBox
 
