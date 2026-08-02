@@ -60,7 +60,7 @@ Step 6: Verify Connectivity
     I went back to the VirtualBox network settings to check the issue, maybe it was because I set the network name
     or maybe the network type wrong, in which I did not, I performed 'ipconfig /all' command again on both machines
     and carefully analyzed the issue, I then found out that I can ping the default gateway and recieve responses on 
-    both machine, so why can't I ping the other machine? The answer was simple, a firewall was blocking the ping
+    both machines, so why can't I ping the other machine? The answer was simple, a firewall was blocking the ping
     or icmp request from one machine to the other. So to test it, I temporarily opened both machine's inbound rule
     and pinged them together, as a result, they started communicating with each other,
     and I found out that the issue was in the firewall itself and have fixed the issue.
