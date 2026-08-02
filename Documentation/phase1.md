@@ -49,18 +49,26 @@ Step 5: Configure a static IP address
     a Domain Controller needs to have a fixed, predictable IP address.
 
     # Open Command Prompt by pressing 
-    Win + R or Win + S, type cmd and hit enter, we first verify the ip addresses, 
-    our virtual machines begin with 10.x.x.x and our host machine begins with 192.x.x.x, therefore
-    , we have successfully created a subnet on our last step. Now, let us open our Control Panel.
+    Win + R or Win + S, type cmd and hit enter, we first verify the ip addresses, we performed 'ipconfig /all' on
+    our virtual machines and host machine and our virtual machhines ip addresses begin with 10.x.x.x and 
+    our host machine begins with 192.x.x.x, therefore
+    the virtual network we have created is working, Now, let us use our DC01 machine and open our Control Panel,
+    we then head over to Ethernet, right click and click properties, 
+    double-click on IPV4, and we set the following:
+
+     # IP Address:  10.0.3.10
+     # Subnet Mask: 255.255.255.0
+     # Default Gateway: 10.0.3.1
+     # Preferred DNS Server: 10.0.3.10
 
 Step 6: Verify Connectivity
 
-    # I opened the cmd terminal and typed 'ipconfig /all' on both machines, I tried to verify the connection 
+    # After configuration, I opened the cmd terminal and typed 'ipconfig /all' on both machines, I tried to verify the connection 
     between the DC01 machine to our PC01 machine by pinging them, however I recieved a request timed out response. 
     I went back to the VirtualBox network settings to check the issue, maybe it was because I set the network name
     or maybe the network type wrong, in which I did not, I performed 'ipconfig /all' command again on both machines
     and carefully analyzed the issue, I then found out that I can ping the default gateway and recieve responses on 
-    both machines, so why can't I ping the other machine? The answer was simple, a firewall was blocking the ping
+    both machines, so why can't I ping the other machine? The troubleshoot was simple, a firewall was blocking the ping
     or icmp request from one machine to the other. So to test it, I temporarily opened both machine's inbound rule
     and pinged them together, as a result, they started communicating with each other,
     and I found out that the issue was in the firewall itself and have fixed the issue.
