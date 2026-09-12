@@ -34,13 +34,13 @@ The Server 2025 download is confirmed by the saved Phase 1 screenshot and matche
 
 ## Documentation and Roadmap
 
-Phases 1 and 2 are recorded as complete; Phase 3 is in progress. Client setup and Group Policy work overlap phases, as noted below.
+Phases 1–3 are recorded as complete. Phase 3 includes evidence of effective domain policy, password reset acceptance/rejection, and actual test-account lockout. Client setup and Group Policy work overlap phases, as noted below.
 
 | Phase | Scope | Status / documentation |
 | --- | --- | --- |
 | 1 | VM installation, networking, and connectivity | [Complete](Documentation/phase1.md) |
 | 2 | AD DS, domain controller promotion, and DNS installation | [Complete](Documentation/phase2.md) |
-| 3 | OUs, users, groups, and initial Group Policy | [In progress](Documentation/phase3.md) |
+| 3 | OUs, users, groups, and initial Group Policy validation | [Complete](Documentation/phase3.md) |
 | 4 | Client naming, DNS setup, domain join, and authentication | Walkthrough pending |
 | 5 | Additional Group Policy and validation | Planned |
 | 6 | Shared folders, share/NTFS permissions, and access testing | Planned |
@@ -87,9 +87,7 @@ Shared folder administration, NTFS permissions, and reusable PowerShell automati
 
 * Add VM hardware allocations and the NAT Network name and DHCP range to Phase 1.
 * Add the PC01 domain-join walkthrough so readers can reproduce the setup used in Phase 3.
-* Reconcile the earlier client report showing `DESKTOP-4F5OJ04` with the later `PC01` computer object; document the rename sequence.
-* Record validation outcomes for password and account lockout settings; the current notes describe configuration and initial testing.
-* Record GPO link precedence and account expiration exceptions as described in Phase 3's follow-up checks.
+* Document the historical client rename sequence in Phase 4. Phase 3 now confirms the current Windows hostname is `PC01`.
 
 ## Future Improvements
 
