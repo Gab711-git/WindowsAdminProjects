@@ -1,77 +1,100 @@
-# PHASE 1
+# Phase 1 — Installation and Networking
 
-STEP 1: Download the Prerequisites
+[Project overview](../READme.md) · [Next: Active Directory](phase2.md)
 
-    # This project uses Microsoft Evaluation editions
+**Status:** Installation and connectivity work recorded as complete. The Windows client domain-join walkthrough remains to be documented separately.
 
-    # Download Windows Server 2022 Evaluation
-    # Download Windows 11 Enterprise Evaluation
-    # Download Oracle VirtualBox
+## Step 1: Download the prerequisites
 
-STEP 2: Install and configure the Virtual Machines
+This lab uses Windows Server 2025 Evaluation, Windows 11 Enterprise Evaluation, and Oracle VirtualBox. See [Prerequisites](Prerequisites.md) for download links.
 
-    # Credentials for Windows Server Evaluation
-    Username: Administrator
-    Password: WindowsLab2026!
+The original notes said Server 2022; the saved download screenshot identifies Server 2025, matching the prerequisites and Phase 2.
 
-    # Credentials for Windows 11 Evaluation
-    Username: Admin
-    Password: WindowsLab2026$
+![Windows Server 2025 evaluation download page](../Screenshots/phase1/WindowsServerInstallation.png)
 
-STEP 3: Rename the server to DC01
+## Step 2: Install the virtual machines
 
-    # Open Server Manager, then head to Local Server, click on the Server's Name,
-    in this case 'WIN-M3TE09BT9RP' change it to 'DC01' by clicking on Change button,
-    beside the label "To rename this computer or change its domain or workgroup, click Change." 
-    Then perform a system restart to apply changes.
+Create a server VM and a Windows 11 client VM, attach their installation ISOs, and complete Windows setup. The server will become DC01; the client is referred to as PC01 throughout this project.
 
-STEP 4: Configure the VirtualBox Network
+| Machine | Initial local account |
+| --- | --- |
+| Windows Server | `Administrator` |
+| Windows 11 | `Admin` |
 
-    # Before we begin our connection, we first need to know what connectivity best fits our scenario,
-    in this case, we will use a NAT Network, because we want our system to access the internet, 
-    as well as download updates and install additional tools. While also giving us a 'private network' 
-    which contains my virtual system from interfering with my home LAN.
-    Why not use Bridged Adapter? Because we do not want our virtual system to be accessed and 
-    known to other people on the LAN, and that we are doing this safely in a private-controlled environment.
+Choose passwords during setup and store them privately. Literal passwords from the original notes have been replaced with this instruction.
 
-    # We shut down the server first, open our Virtual Machine, click on settings, then head to Network, 
-    and change it to NAT Network. 
-    
-    # Repeat for all Machines participating in the lab, 
-    in this case, the "Windows 11 Enterprise Evaluation" Machine.
+The original walkthrough does not record VM memory, CPU, disk allocations, or all installation choices; add these when documenting reproducibility.
 
-    # The DC01 Server and Windows 11 Enterprise is already configured to NAT Network.
+![Windows Server dashboard](../Screenshots/phase1/WindowsServerDashboard.png)
 
-Step 5: Configure a static IP address
+## Step 3: Rename the server to DC01
 
-    # Why do we need to configure our Domain Controller's IP address?
-    because we do not want DHCP to set it automatically for us, 
-    a Domain Controller needs to have a fixed, predictable IP address.
+1. Open **Server Manager > Local Server**.
+2. Select the current computer name, then **Change**.
+3. Set the computer name to `DC01`.
+4. Restart the server to apply the change.
 
-    # Open Command Prompt by pressing 
-    Win + R or Win + S, type cmd and hit enter, we first verify the ip addresses, we performed 'ipconfig /all' on
-    our virtual machines and host machine and our virtual machhines ip addresses begin with 10.x.x.x and 
-    our host machine begins with 192.x.x.x, therefore
-    the virtual network we have created is working, Now, let us use our DC01 machine and open our Control Panel,
-    we then head over to Ethernet, right click and click properties, 
-    double-click on IPV4, and we set the following:
+![Server rename settings](../Screenshots/phase1/RenameServer.png)
 
-     # IP Address:  10.0.3.10
-     # Subnet Mask: 255.255.255.0
-     # Default Gateway: 10.0.3.1
-     # Preferred DNS Server: 10.0.3.10
+![Server rename result](../Screenshots/phase1/RenameServerResult.png)
 
-Step 6: Verify Connectivity
+## Step 4: Configure the VirtualBox network
 
-    # After configuration, I opened the cmd terminal and typed 'ipconfig /all' on both machines, 
-    I tried to verify the connection between the DC01 machine to our PC01 machine by pinging them, 
-    however I recieved a request timed out response. I went back to the VirtualBox network settings 
-    to check the issue, maybe it was because I set the network name or maybe the network type wrong,
-    in which I did not, I performed 'ipconfig /all' command again on both machines and carefully analyzed the issue, 
-    I then found out that I can ping the default gateway and recieve responses on both machines, 
-    so why can't I ping the other machine? The troubleshoot was simple, a firewall was blocking the ping
-    or icmp request from one machine to the other. So to test it, I temporarily opened both machine's inbound rule
-    and pinged them together, as a result, they started communicating with each other,
-    and I found out that the issue was in the firewall itself and have fixed the issue.
+This lab uses **NAT Network** so the VMs can communicate with one another and make outbound connections without being bridged directly onto the home LAN. This is not complete isolation from external networks. See Oracle's [NAT service documentation](https://www.virtualbox.org/manual/ch06.html#network_nat_service).
 
-# PHASE 1 Complete 
+1. Shut down both VMs.
+2. In VirtualBox's network settings, create or select the shared NAT Network for the lab.
+3. In each VM's **Settings > Network**, enable its adapter and select **NAT Network**.
+4. Select the same network name for both VMs and ensure the virtual cable is connected.
+5. Start both VMs.
+
+The recorded address plan uses `10.0.3.0/24` with gateway `10.0.3.1`. Confirm the NAT Network matches that plan and keep DC01's static address outside any DHCP allocation range. The original notes do not record the network name or DHCP range.
+
+## Step 5: Configure DC01's static IPv4 address
+
+Run the following in Command Prompt to inspect the initial configuration:
+
+```cmd
+ipconfig /all
+```
+
+Open the Ethernet adapter's properties and select **Internet Protocol Version 4 (TCP/IPv4)**. Apply the recorded settings:
+
+| Setting | Value |
+| --- | --- |
+| IP address | `10.0.3.10` |
+| Subnet mask | `255.255.255.0` |
+| Default gateway | `10.0.3.1` |
+| Preferred DNS server | `10.0.3.10` |
+
+DC01 needs a predictable address for clients to locate its services. Its own DNS service is installed in Phase 2; DNS resolution through `10.0.3.10` is not expected to work before that service is available. PC01 will also need to use the AD DNS server before joining the domain.
+
+![DC01 IPv4 configuration](../Screenshots/phase1/ServerIPConfiguration.png)
+
+## Step 6: Verify connectivity and troubleshoot ICMP
+
+Run `ipconfig /all` on both VMs. Check their addresses, subnet masks, and gateways; different address prefixes on the host and VMs alone do not prove connectivity.
+
+From each VM, test the gateway:
+
+```cmd
+ping 10.0.3.1
+```
+
+From the client, test DC01:
+
+```cmd
+ping 10.0.3.10
+```
+
+From DC01, ping the client's actual IPv4 address shown by `ipconfig /all`.
+
+**Recorded result:** Both VMs could reach the gateway, but initial pings between them timed out. The VirtualBox settings were checked, and allowing inbound ICMP echo requests resolved the issue.
+
+For a repeatable test, enable only the required ICMPv4 Echo Request inbound rule for the applicable firewall profile and lab scope. Keep the firewall enabled. The original notes do not identify the exact rule or scope used.
+
+![Saved connectivity verification](../Screenshots/phase1/verification.png)
+
+## Outcome
+
+The notes record completed VM setup, DC01 naming, static networking, and successful connectivity troubleshooting. Continue with [Phase 2](phase2.md) to install AD DS and DNS.

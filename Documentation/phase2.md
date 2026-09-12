@@ -1,110 +1,94 @@
-# PHASE 2
+# Phase 2 — Active Directory Domain Services
 
-STEP 1: Install Active Directory Domain Services Role
+[Project overview](../READme.md) · [Previous: Installation and networking](phase1.md) · [Next: Users and Group Policy](phase3.md)
 
-    # Why do we need Active Directory? 
+**Status:** Domain controller deployment and initial verification recorded as complete.
 
-    #We need Active Directory Domain Services because we need to store information about the users, computers,
-    and other end devices on our enterprise network. 
-    Active Directory also helps administrators enforce policies and facilitate resource sharing and 
-    collaboration between employees within an organization.
+## Prerequisites
 
-    # First we open 'Server Manager' on our DC01 machine, we then head to 'Manage' then to 'Add Roles and Features'.
+Complete Phase 1. DC01 should have its final hostname and static address, `10.0.3.10`. Sign in using the local `Administrator` account before promotion.
 
-    # We then get taken to the Wizard tab, choose Role-based or feature-based installation and click next.
+## Step 1: Install the AD DS role
 
-    # In Server Selection part, we will see DC01, our server name, we leave it selected, then we click next
+Active Directory Domain Services stores directory objects such as users, groups, and computers and supports domain authentication and administration.
 
-    # In Server Roles, we leave Active Directory Domain Services checked, then Windows will ask us 
-    'Add features that are required?' we then leave 'Add Features' checked.
+1. Open **Server Manager > Manage > Add Roles and Features**.
+2. Choose **Role-based or feature-based installation**.
+3. Select `DC01` as the destination server.
+4. Select **Active Directory Domain Services**, then **Add Features** when prompted.
+5. Continue through the Features and AD DS information pages.
+6. Review the selection and select **Install**. Automatic restart was left unchecked in this lab.
+7. Wait for successful installation, then select **Promote this server to a domain controller** from the result page or Server Manager notification.
 
-    # In Features, we just click next.
+Role installation and domain controller promotion are separate steps. The installation wizard can be closed without interrupting the background installation, as noted on its result page.
 
-    # In Active Directory Domain Services Information part, it basically explains Active Directory.
+![AD DS role selection](../Screenshots/phase2/activedirectorydomainservices.png)
 
-    # In Confirmation, we set all to default, we can also leave 'Restart the destination server automatically if required' 
-    part checked. But in this lab, we did not select this option, and then we hit 'Install'. 
-    We then wait for the installation process, it is important to not close the Server Manager, 
-    when it is finished, do not restart manually, after installation is complete, we will recieve a yellow notification flag
-     on the top right part of Server Manager, do not click it yet.
+![Role installation completed; promotion required](../Screenshots/phase2/promote.png)
 
-STEP 2: Promote DC01 to a Domain Controller
+## Step 2: Create the forest and promote DC01
 
-    # After installation finishes, we will promote DC01 to a Domain Controller, we click 'Promote this server to a domain controller'
+1. In **Deployment Configuration**, select **Add a new forest**.
+2. Enter `InfiniteVoid.local` as the root domain name.
+3. Configure the Domain Controller Options using the settings recorded below.
 
-    # In Deployment Configuration, we will see 3 choices, 'choose Add a new forest':
+![New forest root domain](../Screenshots/phase2/rootdomainname.png)
 
-        # Add a domain controller to an existing domain
-        # Add a new domain to an existing forest
-        # Add a new forest
+| Option | Recorded setting |
+| --- | --- |
+| Forest functional level | Windows Server 2025 |
+| Domain functional level | Windows Server 2025 |
+| DNS server | Selected |
+| Global Catalog | Selected |
+| Read-only domain controller | Not selected |
 
-    # Now for the Root domain name, we will name it: InfiniteVoid.local, we then click next.
+Use the functional levels supported by the installed server version; the values above are from the lab notes.
 
-    # In Domain Controller Options, we will use the following configurations:
+Set a separate **Directory Services Restore Mode (DSRM)** password and store it privately. This recovery credential is distinct from the account used for normal domain sign-in. The literal password has been omitted from this document.
 
-        # Forest Functional Level: Windows Server 2025
-        # Domain Functional Level: Windows Server 2025
-        # DNS Server : Checked
-        # Global Catalog : Checked
-        # Read-Only Domain Controller(RODC) : Unchecked
-    
-    # Directory Service Restore Mode(DSRM) : Password
+A DNS delegation warning was recorded. For this standalone lab forest, no parent DNS delegation was configured. Review warnings in context; a delegation warning does not mean all prerequisite warnings can be ignored. Microsoft describes these options in the [AD DS Configuration Wizard reference](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/ad-ds-installation-and-removal-wizard-page-descriptions).
 
-        # Do not use Administrative Password, they are not the same, and is important to not use the same password as is.
-        It is a recovery password, if ever we need to resore or perform a backup on our Active Directory. 
-        It is also important to also use a strong password we can remember, or use a password manager.
+Continue with these settings:
 
-    # Password for Directory Services Restore Mode (DSRM): WindowsLabRecover!, we then click next.
+| Setting | Value |
+| --- | --- |
+| NetBIOS domain name | `INFINITEVOID` |
+| Database folder | `C:\Windows\NTDS` |
+| Log files folder | `C:\Windows\NTDS` |
+| SYSVOL folder | `C:\Windows\SYSVOL` |
 
-    # In DNS options, we will recieve a warning, 'A delegation, for this DNS server cannot be created.' 
-    Do not panic, and just ignore the message, as this was expected because it is our first domain controller. We then click next.
+Review the configuration, run the prerequisite checks, and resolve errors before selecting **Install**. Promotion configures AD DS and DNS and restarts the server.
 
-    # In Additional options, we should see 'NetBIOS domain name: INFINITEVOID', leave it as is and click next.
+After restart, sign in as `INFINITEVOID\Administrator` using the Administrator account password, not the DSRM password.
 
-    # In Paths, we will see:
+![Domain Administrator sign-in screen](../Screenshots/phase2/newloginscreen.png)
 
-        # Database folder
-        # Log files folder
-        # SYSVOL folder
+## Step 3: Verify the initial deployment
 
-    # Leave the default locations
+In **Command Prompt**, run:
 
-        # C:\Windows\NTDS
-        # C:\Windows\NTDS
-        # C:\Windows\SYSVOL
-    
-    # In Review Options, it is just a summary of our configuration choices, and then proceed with next.
+```cmd
+echo %USERDOMAIN%
+hostname
+```
 
-    # In Prerequisites Check, Windows will perform various checks, might see some warnings, but as long as there 
-    are no errors we are good to proceed and hit 'Install', and wait for installation.
+Expected values are `INFINITEVOID` and `DC01` respectively. These identify the sign-in domain and hostname; they are not a full AD health check.
 
-    # After all this, the server will Install Active Directory, DNS, configure the domain based on our trim, and reboot automatically.
+![Recorded domain and hostname verification](../Screenshots/phase2/verification.png)
 
-    # We will notice a few changes, firstly, our login screen changes to 'INFINITEVOID\Administrator', 
-    we use our default password, not the DSRM password to login, and hit 'enter'. 
+Open **Server Manager > Tools** and check for the installed administrative tools:
 
-STEP 3: Verify
+* Active Directory Users and Computers
+* Active Directory Administrative Center
+* Active Directory Domains and Trusts
+* Active Directory Sites and Services
+* DNS
+* Group Policy Management
 
-    # Verify the domain and hostname
+Open **Active Directory Users and Computers** (`dsa.msc`) and expand `InfiniteVoid.local`. The initial directory includes the `Builtin`, `Computers`, and `Users` containers, plus the `Domain Controllers` OU. Containers and OUs are different object types.
 
-    # Open Command prompt, type in 'echo %USERDOMAIN%' and hit 'enter'. We are expecting 'INFINITEVOID' output. 
-    then type 'hostname' and hit 'enter'. We are expecting 'DC01'
+![Active Directory Users and Computers after promotion](../Screenshots/phase2/adusersandcomputers.png)
 
-    # Verify the Active Directory
+## Outcome
 
-    # Open Server Manager, then head to Tools, we should be able to see new tools such as the following:
-
-        # Active Directory Users and Computers
-        # Active Directory Administrative Center
-        # Active Directory Domains and Trusts
-        # Active Directory Sites and Services
-        # DNS
-        # Group Policy Management
-    
-    # Again on Server Manager, head to Tools. head to Active Directory Users and Computers, 
-    on the left-hand side, expand 'InfiniteVoid.local'.
-
-    # We should be able to see containers such as Builtin, Computers, Domain Controllers, and Users. 
-    This is our Active Directory database.
-
-# PHASE 2 Complete
+The notes record DC01 promotion, domain sign-in, and initial directory verification. DNS was installed with AD DS; separate DNS resolution and domain health test results have not yet been recorded. Continue with [Phase 3](phase3.md) to create users, groups, and policies.
