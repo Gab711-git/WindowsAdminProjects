@@ -4,7 +4,7 @@ A hands-on Windows Server homelab built using Oracle VirtualBox to practice admi
 
 The lab uses DC01 as the domain controller for `InfiniteVoid.local` and PC01 as a Windows 11 client. This project is in progress. The notes currently cover installation, Active Directory deployment, users and groups, and initial Group Policy configuration.
 
-**Start here:** [Prerequisites](Documentation/Prerequisites.md) → [Phase 1](Documentation/phase1.md) → [Phase 2](Documentation/phase2.md) → [Phase 3](Documentation/phase3.md)
+**Start here:** [Prerequisites](Documentation/Prerequisites.md) → [Phase 1](Documentation/phase1.md) → [Phase 2](Documentation/phase2.md) → [Phase 3](Documentation/phase3.md) → [Phase 4](Documentation/phase4.md)
 
 ## Contents
 
@@ -34,21 +34,23 @@ The Server 2025 download is confirmed by the saved Phase 1 screenshot and matche
 
 ## Documentation and Roadmap
 
-Phases 1–3 are recorded as complete. Phase 3 includes evidence of effective domain policy, password reset acceptance/rejection, and actual test-account lockout. Client setup and Group Policy work overlap phases, as noted below.
+Phases 1–4 are recorded as complete for their documented scopes. Phase 3 includes evidence of effective domain policy, password reset acceptance/rejection, and actual test-account lockout. Client setup and Group Policy work overlap phases, as noted below.
 
 | Phase | Scope | Status / documentation |
 | --- | --- | --- |
 | 1 | VM installation, networking, and connectivity | [Complete](Documentation/phase1.md) |
 | 2 | AD DS, domain controller promotion, and DNS installation | [Complete](Documentation/phase2.md) |
 | 3 | OUs, users, groups, and initial Group Policy validation | [Complete](Documentation/phase3.md) |
-| 4 | Client naming, DNS setup, domain join, and authentication | Walkthrough pending |
+| 4 | Client setup walkthrough, network/domain checks, and domain-session evidence | [Complete](Documentation/phase4.md) |
 | 5 | Additional Group Policy and validation | Planned |
 | 6 | Shared folders, share/NTFS permissions, and access testing | Planned |
 | 7 | PowerShell user and account automation | Planned |
 
-Client installation is covered in Phase 1, and Phase 3 already includes domain-user testing and PC01 organization. Phase 4 will fill in the missing rename and domain-join procedure. Phase 5 will build on the password and lockout settings with validation and planned wallpaper, Control Panel, USB storage, and Command Prompt restrictions.
+Client installation is covered in Phase 1, and Phase 3 already includes domain-user testing and PC01 organization. Phase 4 documents the rename and domain-join procedure for reproduction and verifies the existing client configuration. Phase 5 will build on the password and lockout settings with validation and planned wallpaper, Control Panel, USB storage, and Command Prompt restrictions.
 
 Download resources are listed in [Prerequisites](Documentation/Prerequisites.md). Screenshots are stored by phase in [Screenshots](Screenshots/).
+
+View the Windows client evidence in [Phase 4 screenshots](Screenshots/phase4/).
 
 ## Repository Structure
 
@@ -58,13 +60,15 @@ WindowsAdminProjects/
 │   ├── Prerequisites.md
 │   ├── phase1.md
 │   ├── phase2.md
-│   └── phase3.md
+│   ├── phase3.md
+│   └── phase4.md
 ├── Powershell/
 │   └── cmd1                 # Empty placeholder
 ├── Screenshots/
 │   ├── phase1/
 │   ├── phase2/
-│   └── phase3/
+│   ├── phase3/
+│   └── phase4/
 └── READme.md
 ```
 
@@ -86,8 +90,8 @@ Shared folder administration, NTFS permissions, and reusable PowerShell automati
 ## Documentation Gaps to Resolve
 
 * Add VM hardware allocations and the NAT Network name and DHCP range to Phase 1.
-* Add the PC01 domain-join walkthrough so readers can reproduce the setup used in Phase 3.
-* Document the historical client rename sequence in Phase 4. Phase 3 now confirms the current Windows hostname is `PC01`.
+* Phase 4 includes a reproduction guide; historical screenshots of the original client rename/join wizard are unavailable.
+* Phase 4 records successful forward DNS resolution, an initial timeout of unconfirmed cause, and an unavailable reverse lookup. It does not claim these DNS observations were repaired.
 
 ## Future Improvements
 
